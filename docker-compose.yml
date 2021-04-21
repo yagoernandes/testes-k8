@@ -1,23 +1,37 @@
 version: '2'
 services:
-	rabbit:
-		hostname: rabbit
-		image: rabbitmq:latest
-		environment:
-			- RABBITMQ_DEFAULT_USER=guest
-			- RABBITMQ_DEFAULT_PASS=guest
-		ports:
-			- "5672:5672"
-			- "25676:25676"
-			- "8080:15672"
+  rabbit:
+    hostname: rabbit
+    image: rabbitmq:latest
+    environment:
+      - RABBITMQ_DEFAULT_USER=yago
+      - RABBITMQ_DEFAULT_PASS=testeteste
+    ports:
+      - "5672:5672"
+      - "25676:25676"
+      - "15672:15672"
 
-	worker:
-		build:
-			context: ./robo
-			dockerfile: dockerfile
-		volumes:
-			- .:/app
-		links:
-			- rabbit
-		depends_on:
-			- rabbit
+  worker:
+    build:
+      context: ./robo
+      dockerfile: Dockerfile
+    environment:
+      - CELERY_URI=amqp://yago:testeteste@rabbit:5672
+      - CELERY_NAME=hello
+    links:
+      - rabbit
+    depends_on:
+      - rabbit
+
+  api:
+    build:
+      context: ./api
+      dockerfile: Dockerfile
+    environment:
+      - CELERY_URI=amqp://yago:testeteste@rabbit:5672
+    ports:
+      - "8081:8888"
+    links:
+      - worker
+    depends_on:
+      - rabbit

@@ -1,2 +1,2 @@
-# Testes com K8 e monorepo
+# Testes com K8s e monorepo
 
