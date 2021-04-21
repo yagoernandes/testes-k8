@@ -10,7 +10,6 @@ click-repl==0.1.6
 cryptography==3.4.7
 importlib-metadata==4.0.0
 kombu==5.0.2
-librabbitmq==2.0.0
 msgpack==1.0.2
 prompt-toolkit==3.0.18
 pycparser==2.20

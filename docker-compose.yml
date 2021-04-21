@@ -12,6 +12,7 @@ services:
       - "15672:15672"
 
   worker:
+    hostname: celery
     build:
       context: ./robo
       dockerfile: Dockerfile
@@ -24,6 +25,7 @@ services:
       - rabbit
 
   api:
+    hostname: tornado
     build:
       context: ./api
       dockerfile: Dockerfile
@@ -32,6 +34,7 @@ services:
     ports:
       - "8081:8888"
     links:
+      - rabbit
       - worker
     depends_on:
       - rabbit

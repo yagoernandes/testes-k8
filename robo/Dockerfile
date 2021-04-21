@@ -8,4 +8,4 @@ WORKDIR /usr/src/app
 COPY . /usr/src/app/
 RUN pip install --no-cache-dir -r requirements.txt
 
-ENTRYPOINT ["celery", "-A", "tasks", "worker", "-Q", "hello-world"]
+ENTRYPOINT ["celery", "-A", "tasks", "worker", "-Q", "hello-world", "--loglevel=DEBUG"]

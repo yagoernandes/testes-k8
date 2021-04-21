@@ -3,7 +3,7 @@ import tornado.ioloop
 from servicos.Hello import HelloHandler
 import os
 
-API_PORT = os.environ.get('API_PORT') or 8888
+API_PORT = os.environ.get('API_PORT') or 8881
 
 def make_app():
     return tornado.web.Application([
